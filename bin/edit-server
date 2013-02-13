@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+require 'edit_server'
+require 'forever'
+require 'thin'
+
+Forever.run do
+  before :all do
+    app = EditServer::Base.new
+    Rack::Handler::Thin.run(EditServer::Base.new, :Port => 9292)
+  end
+end
